@@ -1,0 +1,22 @@
+{
+    "name": "com.virendra531.processmanager",
+    "version": "0.1.0",
+    "unity": "2020.1",
+    "displayName": "Process Manager",
+    "type": "tool",
+    "description": "Process Manager",
+    "keywords": [
+        "Process Manager"
+    ],
+    "author": {
+        "name": "Virendra Kumar"
+    },
+    "samples": [
+        {
+            "displayName": "Sample",
+            "description": "Example of how to use Process Manager",
+            "path": "Example~/Samples"
+        }
+    ],
+    "hideInEditor": false
+}

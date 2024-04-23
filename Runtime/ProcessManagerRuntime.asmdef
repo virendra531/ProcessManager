@@ -1,0 +1,17 @@
+{
+    "name": "ProcessManagerRuntime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:96e8cbb511ff5448b835437c98d7297a",
+        "GUID:c8b5fe2a295c54379991b07454c66937"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
