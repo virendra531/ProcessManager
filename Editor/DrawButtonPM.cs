@@ -7,16 +7,7 @@ using System.Reflection;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public class DrawButtonPMAttribute: PropertyAttribute
-{
-    public string buttonName;
-    public bool playModeOnly;
-    public bool editorModeOnly;
-    public DrawButtonPMAttribute(string buttonName = null){
-       this.buttonName = buttonName;
-   }
-}
+
 #if UNITY_EDITOR
 [CanEditMultipleObjects]
 [CustomEditor(typeof(MonoBehaviour), true)]
