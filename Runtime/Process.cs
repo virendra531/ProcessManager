@@ -159,7 +159,7 @@ public class Process : MonoBehaviour
 
     //--------------------------------------------
 
-    [DrawButton("Activate This Process")]
+    [DrawButtonPM("Activate This Process")]
     public void ForceEnable()
     {
         IsActive = true;

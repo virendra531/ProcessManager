@@ -10,7 +10,7 @@ public class SetProcessVariable : MonoBehaviour
     public bool setPrevProcess;
     public bool setNextProcess;
     public bool setDependOnProcess;
-    [DrawButton("Set Variable for Guided")]
+    [DrawButtonPM("Set Variable for Guided")]
     public void SetVariableForGuided()
     {
         Process[] allChildProcess = GetComponentsInChildren<Process>(true);

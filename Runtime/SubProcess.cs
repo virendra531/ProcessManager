@@ -54,7 +54,7 @@ public class SubProcess : MonoBehaviour
     //         WhenComplete.Invoke();
     //     }
     // }
-    [DrawButton]
+    [DrawButtonPM]
     public void _SubProcessCompeleted()
     {
         if(process.IsActive)
@@ -62,7 +62,7 @@ public class SubProcess : MonoBehaviour
             StartCoroutine(SetPercentage(completePercentage));
         }
     }
-    [DrawButton]
+    [DrawButtonPM]
     public void _SubProcessStart()
     {
         if(process.IsActive)

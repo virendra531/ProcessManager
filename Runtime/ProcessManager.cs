@@ -22,7 +22,7 @@ public class ProcessManager : MonoBehaviour
     private Process[] allProcess;
     private Process prevProcess;
 
-    [DrawButton("Awake")]
+    [DrawButtonPM("Awake")]
     public void Awake() {
         Process.isGuidedActive = enableGuidedMode;
         // Debug.Log("Guided Mode is : " + (Process.isGuidedActive));
@@ -126,12 +126,12 @@ public class ProcessManager : MonoBehaviour
         }
     }
 
-    [DrawButton("Enable Guided")]
+    [DrawButtonPM("Enable Guided")]
     public void EnableGuided()
     {
         EnableGuidedMode = true;
     }
-    [DrawButton("Disable Guided")]
+    [DrawButtonPM("Disable Guided")]
     public void DisableGuided()
     {
         EnableGuidedMode = false;
