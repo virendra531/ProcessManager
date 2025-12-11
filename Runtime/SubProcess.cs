@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BitByte;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class SubProcess : MonoBehaviour
 {
     public Process process;

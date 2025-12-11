@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using BitByte;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 public class Process : MonoBehaviour
 {
     #region Variables
