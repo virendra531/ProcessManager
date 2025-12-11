@@ -10,10 +10,12 @@ public class ProcessManager : MonoBehaviour
 {
     public Process startThisProcess;
     public bool enableGuidedMode = true;
-    public bool EnableGuidedMode{
-        get{return enableGuidedMode;}
-        set{
-            enableGuidedMode = value; 
+    public bool EnableGuidedMode
+    {
+        get { return enableGuidedMode; }
+        set
+        {
+            enableGuidedMode = value;
             Process.isGuidedActive = value;
         }
     }
@@ -22,32 +24,35 @@ public class ProcessManager : MonoBehaviour
     private Process[] allProcess;
     private Process prevProcess;
 
-    [DrawButtonPM("Awake")]
-    public void Awake() {
+    // [DrawButtonPM("Awake")]
+    public void Awake()
+    {
         Process.isGuidedActive = enableGuidedMode;
         // Debug.Log("Guided Mode is : " + (Process.isGuidedActive));
         allProcess = Resources.FindObjectsOfTypeAll<Process>();
         for (int i = 0; i < allProcess.Length; i++)
         {
             // Get all Active Process
-            if(allProcess[i].IsActive) allActiveProcess.Add(allProcess[i]);
+            if (allProcess[i].IsActive) allActiveProcess.Add(allProcess[i]);
 
             allProcess[i].valueChanged += percentageChanges;
             allProcess[i].isActiveChanged += isActiveProcessChanged;
         }
-        Invoke("StartProcess",1f);
+        Invoke("StartProcess", 1f);
     }
     void StartProcess()
     {
-        if(startThisProcess) startThisProcess.ForceEnable();
+        if (startThisProcess) startThisProcess.ForceEnable();
     }
     public void isActiveProcessChanged(Process process)
     {
-        if(process.IsActive)
+        if (process.IsActive)
         {
-           Process findProcess = allActiveProcess.Find(x => x == process);
-           if(findProcess == null) allActiveProcess.Add(process);
-        }else{
+            Process findProcess = allActiveProcess.Find(x => x == process);
+            if (findProcess == null) allActiveProcess.Add(process);
+        }
+        else
+        {
             allActiveProcess.Remove(process);
         }
 
@@ -56,9 +61,10 @@ public class ProcessManager : MonoBehaviour
     public void percentageChanges(Process process)
     {
         // When Process Complete
-        if(process.CurrentPercentage == 100f && Process.isGuidedActive){
-            StartCoroutine( WhenProcessComplete(process) ); 
-        } 
+        if (process.CurrentPercentage == 100f && Process.isGuidedActive)
+        {
+            StartCoroutine(WhenProcessComplete(process));
+        }
     }
 
     public IEnumerator WhenProcessComplete(Process process)
@@ -81,7 +87,7 @@ public class ProcessManager : MonoBehaviour
         // Disable Active Process
         for (int i = 0; i < currentActiveProcess.Length; i++)
         {
-            if(currentActiveProcess[i].nextProcess.Count == 0) continue;
+            if (currentActiveProcess[i].nextProcess.Count == 0) continue;
 
             currentActiveProcess[i].ForceEnableNextProcess();
             currentActiveProcess[i].ForceDisable();
@@ -92,9 +98,11 @@ public class ProcessManager : MonoBehaviour
     {
         Process[] currentActiveProcess = allActiveProcess.ToArray();
 
-        if(currentActiveProcess.Length == 0) {
+        if (currentActiveProcess.Length == 0)
+        {
             Process lastProcess = prevProcess;
-           if(lastProcess.prevProcess.Count != 0){
+            if (lastProcess.prevProcess.Count != 0)
+            {
                 lastProcess.ForceReset();
 
                 // lastProcess.ForceEnablePrevProcess();
@@ -103,17 +111,17 @@ public class ProcessManager : MonoBehaviour
                 // lastProcess.ForceDisable();
 
                 lastProcess.ForceEnable();
-           }
+            }
         }
 
         for (int i = 0; i < currentActiveProcess.Length; i++)
         {
-            if(currentActiveProcess[i].prevProcess.Count == 0) continue;
+            if (currentActiveProcess[i].prevProcess.Count == 0) continue;
 
-            
+
             currentActiveProcess[i].ForceReset();
 
-            
+
             currentActiveProcess[i].ForceResetPrevProcess();
             currentActiveProcess[i].ForceEnablePrevProcess();
 
@@ -126,12 +134,12 @@ public class ProcessManager : MonoBehaviour
         }
     }
 
-    [DrawButtonPM("Enable Guided")]
+    // [DrawButtonPM("Enable Guided")]
     public void EnableGuided()
     {
         EnableGuidedMode = true;
     }
-    [DrawButtonPM("Disable Guided")]
+    // [DrawButtonPM("Disable Guided")]
     public void DisableGuided()
     {
         EnableGuidedMode = false;
@@ -184,6 +192,19 @@ public class ProcessManagerEditor : Editor
         }
 
         GUILayout.EndHorizontal();
+        
+        if(GUILayout.Button("Awake"))
+        {
+            myScript.Awake();
+        }
+        if(GUILayout.Button("Enable Guided"))
+        {
+            myScript.EnableGuided();
+        }
+        if(GUILayout.Button("Disable Guided"))
+        {
+            myScript.DisableGuided();
+        }
 
         DrawDefaultInspector();
 

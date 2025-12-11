@@ -54,15 +54,15 @@ public class SubProcess : MonoBehaviour
     //         WhenComplete.Invoke();
     //     }
     // }
-    [DrawButtonPM]
-    public void _SubProcessCompeleted()
+    // [DrawButtonPM]
+    public void _SubProcessCompleted()
     {
         if(process.IsActive)
         {
             StartCoroutine(SetPercentage(completePercentage));
         }
     }
-    [DrawButtonPM]
+    // [DrawButtonPM]
     public void _SubProcessStart()
     {
         if(process.IsActive)
@@ -111,3 +111,24 @@ public class SubProcess : MonoBehaviour
     }
     #endif
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(SubProcess))]
+public class SubProcessEditor : Editor
+{
+	public override void OnInspectorGUI()
+    {
+    	SubProcess myScript = (SubProcess)target;
+        if(GUILayout.Button("_SubProcessCompleted"))
+        {
+			myScript._SubProcessCompleted();
+        }
+        if(GUILayout.Button("_SubProcessStart"))
+        {
+			myScript._SubProcessStart();
+        }
+		DrawDefaultInspector();
+    }
+}
+#endif

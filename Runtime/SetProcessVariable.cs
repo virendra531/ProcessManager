@@ -10,7 +10,7 @@ public class SetProcessVariable : MonoBehaviour
     public bool setPrevProcess;
     public bool setNextProcess;
     public bool setDependOnProcess;
-    [DrawButtonPM("Set Variable for Guided")]
+    // [DrawButtonPM("Set Variable for Guided")]
     public void SetVariableForGuided()
     {
         Process[] allChildProcess = GetComponentsInChildren<Process>(true);
@@ -21,50 +21,51 @@ public class SetProcessVariable : MonoBehaviour
             allChildProcess[i].nextProcess.Clear();
             allChildProcess[i].DependOnProcess.Clear();
 
-            if(setProcessName){
+            if (setProcessName)
+            {
                 allChildProcess[i].ProcessName = allChildProcess[i].gameObject.name;
             }
-            if(setPrevProcess)
+            if (setPrevProcess)
             {
-                if( (i-1) >= 0)
+                if ((i - 1) >= 0)
                 {
                     // allChildProcess[i].prevProcess.Clear();
-                    allChildProcess[i].prevProcess.Add( allChildProcess[i-1] );
+                    allChildProcess[i].prevProcess.Add(allChildProcess[i - 1]);
                 }
             }
-            if(setNextProcess)
+            if (setNextProcess)
             {
-                if( (i+1) < allChildProcess.Length)
+                if ((i + 1) < allChildProcess.Length)
                 {
                     // allChildProcess[i].nextProcess.Clear();
-                    allChildProcess[i].nextProcess.Add( allChildProcess[i+1] );
+                    allChildProcess[i].nextProcess.Add(allChildProcess[i + 1]);
                 }
             }
-            if(setDependOnProcess)
+            if (setDependOnProcess)
             {
                 // if( (i-1) >= 0)
                 //     allChildProcess[i].DependOnProcess.Add( allChildProcess[i-1] );
 
                 // allChildProcess[i].DependOnProcess.Clear();
 
-                allChildProcess[i].DependOnProcess.AddRange( allChildProcess[i].nextProcess );
-                allChildProcess[i].DependOnProcess.AddRange( allChildProcess[i].prevProcess );
+                allChildProcess[i].DependOnProcess.AddRange(allChildProcess[i].nextProcess);
+                allChildProcess[i].DependOnProcess.AddRange(allChildProcess[i].prevProcess);
             }
         }
     }
 }
-// #if UNITY_EDITOR
-// [CustomEditor(typeof(SetProcessVariable))]
-// public class AddButton : Editor
-// {
-// 	public override void OnInspectorGUI()
-//     {
-//     	SetProcessVariable myScript = (SetProcessVariable)target;
-//         if(GUILayout.Button("Set Variable for Guided"))
-//         {
-// 			myScript.SetVariableForGuided();
-//         }
-// 		DrawDefaultInspector();
-//     }
-// }
-// #endif
+#if UNITY_EDITOR
+[CustomEditor(typeof(SetProcessVariable))]
+public class AddButton : Editor
+{
+	public override void OnInspectorGUI()
+    {
+    	SetProcessVariable myScript = (SetProcessVariable)target;
+        if(GUILayout.Button("Set Variable for Guided"))
+        {
+			myScript.SetVariableForGuided();
+        }
+		DrawDefaultInspector();
+    }
+}
+#endif

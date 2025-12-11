@@ -1,22 +1,23 @@
 {
-    "name": "com.virendra531.processmanager",
-    "version": "0.1.1",
-    "unity": "2020.1",
-    "displayName": "Process Manager",
-    "type": "tool",
-    "description": "Process Manager",
-    "keywords": [
-        "Process Manager"
-    ],
-    "author": {
-        "name": "Virendra Kumar"
-    },
-    "samples": [
-        {
-            "displayName": "Sample",
-            "description": "Example of how to use Process Manager",
-            "path": "Example~/Samples"
-        }
-    ],
-    "hideInEditor": false
+  "name": "com.virendra531.processmanager",
+  "version": "0.1.1",
+  "unity": "2020.1",
+  "displayName": "Process Manager",
+  "type": "tool",
+  "description": "Process Manager",
+  "keywords": [
+    "Process Manager"
+  ],
+  "author": {
+    "name": "Virendra Kumar"
+  },
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "Example of how to use Process Manager",
+      "path": "Example~/Samples"
+    }
+  ],
+  "hideInEditor": false,
+  "_fingerprint": "1989df9245fb260479a18d400d18479183f24aeb"
 }

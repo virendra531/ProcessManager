@@ -159,7 +159,7 @@ public class Process : MonoBehaviour
 
     //--------------------------------------------
 
-    [DrawButtonPM("Activate This Process")]
+    // [DrawButtonPM("Activate This Process")]
     public void ForceEnable()
     {
         IsActive = true;
@@ -252,3 +252,18 @@ public class Process : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
+[CustomEditor(typeof(Process))]
+public class ProcessEditor : Editor
+{
+	public override void OnInspectorGUI()
+    {
+    	Process myScript = (Process)target;
+        if(GUILayout.Button("Activate This Process"))
+        {
+			myScript.ForceEnable();
+        }
+		DrawDefaultInspector();
+    }
+}
+#endif
