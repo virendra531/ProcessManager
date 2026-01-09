@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -159,21 +159,22 @@ public class ProcessManager : MonoBehaviour
 public class ProcessManagerEditor : Editor
 {
     ProcessManager myScript;
-    private void OnEnable() {
+    private void OnEnable()
+    {
         myScript = (ProcessManager)target;
     }
-	public override void OnInspectorGUI()
+    public override void OnInspectorGUI()
     {
-        serializedObject.Update ();
-        
+        serializedObject.Update();
+
         GUILayout.BeginHorizontal();
 
-        if(GUILayout.Button("Prev Process"))
+        if (GUILayout.Button("Prev Process"))
         {
             myScript.PrevProcess();
         }
 
-        if(GUILayout.Button("Next Process"))
+        if (GUILayout.Button("Next Process"))
         {
             myScript.NextProcess();
         }
@@ -181,27 +182,27 @@ public class ProcessManagerEditor : Editor
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
 
-        if(GUILayout.Button("Enable Guided Mode"))
+        if (GUILayout.Button("Enable Guided Mode"))
         {
             myScript.EnableGuided();
         }
 
-        if(GUILayout.Button("Disable Guided Mode"))
+        if (GUILayout.Button("Disable Guided Mode"))
         {
             myScript.DisableGuided();
         }
 
         GUILayout.EndHorizontal();
-        
-        if(GUILayout.Button("Awake"))
+
+        if (GUILayout.Button("Awake"))
         {
             myScript.Awake();
         }
-        if(GUILayout.Button("Enable Guided"))
+        if (GUILayout.Button("Enable Guided"))
         {
             myScript.EnableGuided();
         }
-        if(GUILayout.Button("Disable Guided"))
+        if (GUILayout.Button("Disable Guided"))
         {
             myScript.DisableGuided();
         }
@@ -209,25 +210,35 @@ public class ProcessManagerEditor : Editor
         DrawDefaultInspector();
 
         // Draw Process Bar
-        if(myScript.allActiveProcess != null)
-        for (int i = 0; i < myScript.allActiveProcess.Count; i++)
-        {
-            if(!myScript.allActiveProcess[i].IsActive) continue;
-            ProgressBar ( ( myScript.allActiveProcess[i].CurrentPercentage / 100f), myScript.allActiveProcess[i].ProcessName + " = " + myScript.allActiveProcess[i].CurrentPercentage );
-        }
+        if (myScript.allActiveProcess != null)
+            for (int i = 0; i < myScript.allActiveProcess.Count; i++)
+            {
+                if (!myScript.allActiveProcess[i].IsActive) continue;
+                Process activeProcess = myScript.allActiveProcess[i];
+                string activeSubProcessName = "";
+                foreach (SubProcess item in activeProcess.GetComponentsInChildren<SubProcess>())
+                {
+                    if (item.percentage == activeProcess.CurrentPercentage)
+                    {
+                        activeSubProcessName = item.name;
+                        break;
+                    }
+                }
+                ProgressBar((activeProcess.CurrentPercentage / 100f), $"{activeProcess.ProcessName} = {activeSubProcessName} ({activeProcess.CurrentPercentage})");
+            }
 
 
         serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(target);
     }
-    void ProgressBar (float percentage, string label)
+    void ProgressBar(float percentage, string label)
     {
         // Get a rect for the progress bar using the same margins as a textfield:
-        Rect rect = GUILayoutUtility.GetRect (18, 18, EditorStyles.textField);
-		
+        Rect rect = GUILayoutUtility.GetRect(18, 18, EditorStyles.textField);
+
         // percentage must be between 0 to 1
-        EditorGUI.ProgressBar (rect, percentage, label);
-        EditorGUILayout.Space ();
+        EditorGUI.ProgressBar(rect, percentage, label);
+        EditorGUILayout.Space();
     }
 }
 #endif
